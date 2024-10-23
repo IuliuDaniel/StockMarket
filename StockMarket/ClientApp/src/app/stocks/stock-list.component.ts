@@ -8,6 +8,10 @@ import { StockService, Stock } from '../stock.service';
 })
 export class StockListComponent implements OnInit {
   stocks: Stock[] = [];
+  showPopup: boolean = false;
+  popupContent: string = '';
+  currentSymbol: string = '';
+  tooltipContent: string = '';
   symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL', 'TSLA', 'GOOG', 'BRK.B', 'META', 'UNH', 'XOM', 'LLY', 'JPM', 'JNJ',
                        'V', 'PG', 'MA', 'AVGO', 'HD', 'CVX', 'MRK', 'ABBV', 'COST', 'PEP', 'ADBE'];
   companyNames: string[] = [
@@ -43,6 +47,18 @@ export class StockListComponent implements OnInit {
   ngOnInit(): void {
     this.fetchStockData();
   }
+
+  togglePopup(symbol: string): void {
+    this.showPopup = !this.showPopup; // Toggle visibility
+    this.currentSymbol = symbol; // Set the current stock symbol
+    this.popupContent = `Details about ${symbol}`; // Add actual content here
+  }
+
+  // Close the pop-up when "X" is clicked
+  closePopup(): void {
+    this.showPopup = false; // Hide the pop-up
+  }
+
 
   fetchStockData(): void {
     this.symbols.forEach((symbol, index) => {

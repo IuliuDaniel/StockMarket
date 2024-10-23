@@ -1,49 +1,114 @@
-.stock-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
-  gap: 10px;
-  border: 1px solid #4caf50; /* Border with metallic green tint */
-}
-
-h2 {
-  color: #4caf50; /* Metallic green title */
+/* Ensure headers and cell texts are styled similarly */
+th, td {
+  padding: 15px; /* Increased padding for larger cells */
   text-align: center;
-  font-family: 'Arial', sans-serif;
-  text-shadow: 1px 1px 5px rgba(0, 128, 0, 0.6); /* Subtle glowing effect */
+  border: 1px solid #4caf50; /* Add border to cells */
+  font-family: 'Arial', sans-serif; /* Use the same font family */
+  font-weight: bold; /* Make text bold like headers */
+  color: white; /* Change text color to match header text */
+  text-shadow: 1px 1px 2px #000; /* Shadow for depth */
 }
 
-.stock-header {
-  font-weight: bold;
-  background: linear-gradient(145deg, #2e7d32, #1b5e20); /* Metallic gradient */
-  color: white;
-  display: contents;
-  text-shadow: 1px 1px 2px #000; /* Subtle shadow for metallic depth */
+/* Specific header styles */
+thead {
+  background: linear-gradient(145deg, #2e7d32, #1b5e20); /* Metallic gradient for header */
 }
 
-.stock-row {
-  display: contents;
-}
-
-.stock-cell {
-  padding: 10px;
+/* Specific styles for stock cells */
+tbody tr td {
   background: linear-gradient(145deg, #388e3c, #2e7d32); /* Metallic gradient for cells */
-  color: #f0f0f0;
-  border: 1px solid #4caf50;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Creates depth inside cells */
-  font-family: 'Roboto', sans-serif;
 }
 
 /* Apply a lighter green to even rows */
-.stock-row:nth-child(even) .stock-cell {
+tbody tr:nth-child(even) td {
   background: linear-gradient(145deg, #66bb6a, #4caf50); /* Lighter metallic green for even rows */
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Styles for the entire table */
+.stock-grid {
+  width: 70%; /* Set the width to 70% of the page */
+  margin: 20px auto; /* Center the table */
+  border-collapse: separate; /* Allow cell spacing */
+  border-spacing: 5px; /* Add space between cells */
 }
 
-body {
-  background-color: #1c1c1c; /* Dark background to make the metallic effect stand out */
+h2 {
+  color: #4caf50;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 1px 1px 5px rgba(0, 128, 0, 0.6);
 }
+
+/* Background for the entire body */
+body {
+  background-color: #1c1c1c; /* Dark background */
+}
+
+
+.info-icon {
+  cursor: pointer; /* Change cursor to pointer on hover */
+  margin-left: 5px; /* Space between price and icon */
+  width: 20px; /* Set width of the icon */
+  height: 20px; /* Set height of the icon */
+  vertical-align: middle; /* Align icon with the text */
+  display: inline-block; /* Ensures the icon doesn't push the cell size */
+  line-height: 1; /* Adjust line height to minimize vertical spacing */
+}
+
+
+/* Pop-up styling */
+.popup {
+  position: absolute; /* Allows you to position it near the icon */
+  background-color: #fff; /* White background */
+  border: 1px solid #4caf50; /* Green border */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  padding: 10px;
+  z-index: 10; /* Ensure it stays above other elements */
+  width: 250px; /* Set a reasonable width */
+  border-radius: 8px; /* Rounded corners */
+  top: -20px; /* Adjust positioning relative to the icon */
+  left: 40px; /* Adjust positioning relative to the icon */
+}
+
+/* Pop-up styling */
+.popup {
+  position: absolute; /* This allows positioning relative to the table cell */
+  background-color: #fff; /* White background */
+  border: 1px solid #4caf50; /* Green border */
+
+  padding: 10px;
+  z-index: 10; /* Ensure it stays above other elements */
+  width: 250px; /* Set a reasonable width */
+  border-radius: 8px; /* Rounded corners */
+  top: 0; /* Adjust positioning relative to the icon */
+  left: 30px; /* Adjust positioning relative to the icon */
+}
+
+.popup-content p {
+  color: #000; /* Black text */
+  font-size: 14px; /* Smaller font size */
+  text-shadow: none; /* Ensure no text-shadow */
+}
+/* Pop-up content styling */
+.popup-content {
+  color: #333;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.info-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+
 

@@ -1,13 +1,29 @@
 <h2>Stock Prices</h2>
-<div class="stock-grid">
-  <div class="stock-header">
-    <div>Company</div>
-    <div>Symbol</div>
-    <div>Price</div>
-  </div>
-  <div class="stock-row" *ngFor="let stock of stocks; let i = index" [ngClass]="{'light-row': i % 2 === 0}">
-    <div class="stock-cell">{{ stock.companyName }}</div>
-    <div class="stock-cell">{{ stock.symbol }}</div>
-    <div class="stock-cell">{{ stock.price | currency }}</div>
-  </div>
-</div>
+<table class="stock-grid">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Symbol</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stock of stocks">
+      <td>{{ stock.companyName }}</td>
+      <td>{{ stock.symbol }}</td>
+      <td style="position: relative;">
+        {{ stock.price | currency }}
+        <img src="assets/info_icon.webp" alt="Info Icon" class="info-icon" (click)="togglePopup(stock.symbol)" />
+        <!-- Pop-Up Window -->
+        <div *ngIf="showPopup && currentSymbol == stock.symbol" class="popup">
+          <div class="popup-content">
+            <span class="close" (click)="closePopup()">&times;</span>
+            <p>{{popupContent}}</p> <!-- This will display whatever content you want -->
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
