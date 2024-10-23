@@ -1,0 +1,49 @@
+.stock-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
+  gap: 10px;
+  border: 1px solid #4caf50; /* Border with metallic green tint */
+}
+
+h2 {
+  color: #4caf50; /* Metallic green title */
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 1px 1px 5px rgba(0, 128, 0, 0.6); /* Subtle glowing effect */
+}
+
+.stock-header {
+  font-weight: bold;
+  background: linear-gradient(145deg, #2e7d32, #1b5e20); /* Metallic gradient */
+  color: white;
+  display: contents;
+  text-shadow: 1px 1px 2px #000; /* Subtle shadow for metallic depth */
+}
+
+.stock-row {
+  display: contents;
+}
+
+.stock-cell {
+  padding: 10px;
+  background: linear-gradient(145deg, #388e3c, #2e7d32); /* Metallic gradient for cells */
+  color: #f0f0f0;
+  border: 1px solid #4caf50;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Creates depth inside cells */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Apply a lighter green to even rows */
+.stock-row:nth-child(even) .stock-cell {
+  background: linear-gradient(145deg, #66bb6a, #4caf50); /* Lighter metallic green for even rows */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+body {
+  background-color: #1c1c1c; /* Dark background to make the metallic effect stand out */
+}
+

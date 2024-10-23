@@ -1,0 +1,13 @@
+<h2>Stock Prices</h2>
+<div class="stock-grid">
+  <div class="stock-header">
+    <div>Company</div>
+    <div>Symbol</div>
+    <div>Price</div>
+  </div>
+  <div class="stock-row" *ngFor="let stock of stocks; let i = index" [ngClass]="{'light-row': i % 2 === 0}">
+    <div class="stock-cell">{{ stock.companyName }}</div>
+    <div class="stock-cell">{{ stock.symbol }}</div>
+    <div class="stock-cell">{{ stock.price | currency }}</div>
+  </div>
+</div>
