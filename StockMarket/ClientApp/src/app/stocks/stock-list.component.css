@@ -8,6 +8,9 @@ th, td {
   color: white; /* Change text color to match header text */
   text-shadow: 1px 1px 2px #000; /* Shadow for depth */
 }
+.current-price{
+    text-shadow: none;
+}
 
 /* Specific header styles */
 thead {
@@ -61,7 +64,7 @@ body {
   position: absolute; /* Allows you to position it near the icon */
   background-color: #fff; /* White background */
   border: 1px solid #4caf50; /* Green border */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  box-shadow: none; /* Shadow for depth */
   padding: 10px;
   z-index: 10; /* Ensure it stays above other elements */
   width: 250px; /* Set a reasonable width */
@@ -109,6 +112,19 @@ body {
   margin-left: 10px;
   vertical-align: middle;
 }
+/* Style for yesterday's price */
+.previous-price {
+  font-size: 13px; /* Smaller font size for yesterday's price */ /* Light gray color */
+}
+
+.price-up {
+  color: blue;
+}
+
+.price-down {
+  color: red;
+}
+
 
 
 

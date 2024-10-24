@@ -51,7 +51,7 @@ export class StockListComponent implements OnInit {
   togglePopup(symbol: string): void {
     this.showPopup = !this.showPopup; // Toggle visibility
     this.currentSymbol = symbol; // Set the current stock symbol
-    this.popupContent = `Details about ${symbol}`; // Add actual content here
+    this.popupContent = ` <p><a href="https://www.etoro.com/markets/${symbol.toLowerCase()}" target="_blank" rel="noopener noreferrer">View on eToro</a> </p>`;
   }
 
   // Close the pop-up when "X" is clicked
@@ -59,6 +59,14 @@ export class StockListComponent implements OnInit {
     this.showPopup = false; // Hide the pop-up
   }
 
+  // Getter for comparing prices
+  isPriceUp(stock: Stock): boolean {
+    return stock.previousPrice !== undefined && stock.price > stock.previousPrice;
+  }
+
+  isPriceDown(stock: Stock): boolean {
+    return stock.previousPrice !== undefined && stock.price < stock.previousPrice;
+  }
 
   fetchStockData(): void {
     this.symbols.forEach((symbol, index) => {
@@ -68,6 +76,7 @@ export class StockListComponent implements OnInit {
             this.stocks.push({
               symbol: symbol,
               price: data.c, // Using 'c' for current price
+              previousPrice: data.pc, // Using 'pc;
               companyName: this.companyNames[index]
             });
           }

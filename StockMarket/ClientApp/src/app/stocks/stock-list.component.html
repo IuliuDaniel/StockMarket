@@ -12,13 +12,22 @@
       <td>{{ stock.companyName }}</td>
       <td>{{ stock.symbol }}</td>
       <td style="position: relative;">
-        {{ stock.price | currency }}
+        <!-- Display current price -->
+        <span class ='current-price' [ngClass]="{
+          'price-up': isPriceUp(stock),
+          'price-down': isPriceDown(stock)
+        }">{{ stock.price | currency }}</span>
+        <br />
+        <!-- Display yesterday's price with smaller text -->
+        <small class="previous-price">
+          Yesterday: {{ stock.previousPrice | currency }}
+        </small>
         <img src="assets/info_icon.webp" alt="Info Icon" class="info-icon" (click)="togglePopup(stock.symbol)" />
         <!-- Pop-Up Window -->
         <div *ngIf="showPopup && currentSymbol == stock.symbol" class="popup">
           <div class="popup-content">
             <span class="close" (click)="closePopup()">&times;</span>
-            <p>{{popupContent}}</p> <!-- This will display whatever content you want -->
+            <div [innerHTML]="popupContent"></div>
           </div>
         </div>
       </td>
