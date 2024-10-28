@@ -1,21 +1,28 @@
-// proxy.js
-export default async (req, res) => {
-  const { symbol } = req.query;
-  const apiKey = 'csbs4ghr01qgt32eoptgcsbs4ghr01qgt32eopu0'; // Directly hardcoded API key
+export default async function handler(req, res) {
+  const { symbol, from, to, token } = req.query;
 
-  if (!symbol) {
-    return res.status(400).json({ error: "Symbol is required" });
+  // Check if 'from' and 'to' are present to determine the API endpoint
+  const baseUrl = 'https://finnhub.io/api/v1';
+  let apiUrl;
+
+  if (from && to) {
+    // Company news endpoint
+    apiUrl = `${baseUrl}/company-news?symbol=${symbol}&from=${from}&to=${to}&token=${token}`;
+  } else {
+    // Stock quote endpoint
+    apiUrl = `${baseUrl}/quote?symbol=${symbol}&token=${token}`;
   }
 
   try {
-    const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch from Finnhub");
-    }
+    const response = await fetch(apiUrl);
     const data = await response.json();
-    return res.status(200).json(data);
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    res.status(200).json(data);
   } catch (error) {
-    console.error("Error fetching data:", error);
-    return res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error.message });
   }
-};
+}
