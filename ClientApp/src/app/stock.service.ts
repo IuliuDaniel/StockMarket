@@ -24,7 +24,7 @@ export class StockService {
   constructor(private http: HttpClient) { }
 
   getStocks(symbol: string): Observable<any> {
-    const url = `https://cors-anywhere.herokuapp.com/https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${this.apiKey}`;
+    const url = `/api/proxy?symbol=${symbol}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
