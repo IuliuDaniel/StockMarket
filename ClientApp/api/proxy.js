@@ -1,27 +1,21 @@
-const https = require('https');
-
-export default function handler(req, res) {
+// proxy.js
+export default async (req, res) => {
   const { symbol } = req.query;
-  const apiKey = process.env.FINNHUB_API_KEY; // Make sure to set this in Vercel's environment variables
+  const apiKey = 'csbs4ghr01qgt32eoptgcsbs4ghr01qgt32eopu0'; // Directly hardcoded API key
 
-  if (!symbol || !apiKey) {
-    res.status(400).json({ error: 'Symbol and API key are required' });
-    return;
+  if (!symbol) {
+    return res.status(400).json({ error: "Symbol is required" });
   }
 
-  const apiUrl = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
-
-  https.get(apiUrl, (apiRes) => {
-    let data = '';
-
-    apiRes.on('data', (chunk) => {
-      data += chunk;
-    });
-
-    apiRes.on('end', () => {
-      res.status(apiRes.statusCode).json(JSON.parse(data));
-    });
-  }).on('error', (err) => {
-    res.status(500).json({ error: 'Error fetching data' });
-  });
-}
+  try {
+    const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch from Finnhub");
+    }
+    const data = await response.json();
+    return res.status(200).json(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
