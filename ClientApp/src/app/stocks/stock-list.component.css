@@ -20,12 +20,19 @@ thead {
 
 /* Specific styles for stock cells with a purple theme */
 tbody tr td {
-  background-color: #6a1b9a; /* Solid deep purple for primary cells */
+  background: linear-gradient(135deg, #8e24aa, #6a1b9a); /* Deep gradient */
+  color: #ffffff;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Inner shadow for depth */
+  border-radius: 5px;
+  border: 1px solid #5e1186; /* Darker border for contrast */
 }
+  tbody td:hover {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  }
 
 /* Apply a lighter purple to even rows */
 tbody tr:nth-child(even) td {
-  background-color: #9c27b0; /* Lighter purple for even rows */
+  background: linear-gradient(135deg, #9c27b0, #8e24aa); /* Lighter gradient */
 }
 
 /* Styles for the entire table */

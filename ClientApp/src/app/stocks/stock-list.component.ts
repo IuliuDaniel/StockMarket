@@ -60,9 +60,13 @@ export class StockListComponent implements OnInit {
   @ViewChild('stockList', { static: false }) stockListRef!: ElementRef;
   searchSymbol: string = ''; // To hold the search input value
 
+  // Array with less symbols for testing - less request/page load
+ symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL', 'ADBE' ];
 
+ /*
   symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL', 'TSLA', 'GOOG', 'BRK.B', 'META', 'UNH', 'XOM', 'LLY', 'JPM', 'JNJ',
-    'V', 'PG', 'MA', 'AVGO', 'HD', 'CVX', 'MRK', 'ABBV', 'COST', 'PEP', 'ADBE'];
+                       'V', 'PG', 'MA', 'AVGO', 'HD', 'CVX', 'MRK', 'ABBV', 'COST', 'PEP', 'ADBE'];
+ */
   companyNames: string[] = [
     'Apple Inc.',
     'Microsoft Corp.',
