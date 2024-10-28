@@ -24,7 +24,7 @@ export class StockService {
   constructor(private http: HttpClient) { }
 
   getStocks(symbol: string): Observable<any> {
-    const url = `/api/proxy?symbol=${symbol}`;
+    const url = `/api/proxy?symbol=${symbol}&token=${this.apiKey}`;;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
