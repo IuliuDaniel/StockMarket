@@ -1,0 +1,216 @@
+/* Ensure headers and cell texts are styled similarly */
+th, td {
+  padding: 15px; /* Increased padding for larger cells */
+  text-align: center;
+  border: 1px solid #8e24aa; /* Purple border to match the theme */
+  font-family: 'Arial', sans-serif; /* Use the same font family */
+  font-weight: bold; /* Make text bold like headers */
+  color: white; /* Change text color to match header text */
+  text-shadow: 1px 1px 2px #000; /* Shadow for depth */
+}
+
+.current-price {
+  text-shadow: none;
+}
+
+/* Specific header styles with a purple gradient */
+thead {
+  background: linear-gradient(145deg, #8e24aa, #6a1b9a); /* Metallic gradient for header */
+}
+
+/* Specific styles for stock cells with a purple theme */
+tbody tr td {
+  background-color: #6a1b9a; /* Solid deep purple for primary cells */
+}
+
+/* Apply a lighter purple to even rows */
+tbody tr:nth-child(even) td {
+  background-color: #9c27b0; /* Lighter purple for even rows */
+}
+
+/* Styles for the entire table */
+.stock-grid {
+  width: 70%; /* Set the width to 70% of the page */
+  margin: 20px auto; /* Center the table */
+  border-collapse: separate; /* Allow cell spacing */
+  border-spacing: 5px; /* Add space between cells */
+}
+
+h2 {
+  color: #8e24aa; /* Header color to match theme */
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 1px 1px 5px rgba(128, 0, 128, 0.6); /* Purple shadow */
+}
+
+.info-icon {
+  cursor: pointer; /* Change cursor to pointer on hover */
+  margin-left: 5px; /* Space between price and icon */
+  width: 20px; /* Set width of the icon */
+  height: 20px; /* Set height of the icon */
+  vertical-align: middle; /* Align icon with the text */
+  display: inline-block; /* Ensures the icon doesn't push the cell size */
+  line-height: 1; /* Adjust line height to minimize vertical spacing */
+}
+
+/* Pop-up styling */
+.popup {
+  position: absolute; /* This allows positioning relative to the table cell */
+  background-color: #fff; /* White background */
+  border: 1px solid #8e24aa; /* Purple border */
+
+  padding: 10px;
+  z-index: 10; /* Ensure it stays above other elements */
+  width: 250px; /* Set a reasonable width */
+  border-radius: 8px; /* Rounded corners */
+  top: 0; /* Adjust positioning relative to the icon */
+  left: 30px; /* Adjust positioning relative to the icon */
+}
+
+.popup-content p {
+  color: #000; /* Black text */
+  font-size: 14px; /* Smaller font size */
+  text-shadow: none; /* Ensure no text-shadow */
+}
+
+.popup-content a {
+  text-shadow: none; /* Ensure no text-shadow on the link */
+}
+/* Pop-up content styling */
+.popup-content {
+  color: #333;
+}
+
+.close {
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.info-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* Style for yesterday's price */
+.previous-price {
+  font-size: 13px; /* Smaller font size for yesterday's price */
+}
+
+.price-up {
+  color: lightgreen;
+}
+
+.price-down {
+  color:red;
+}
+
+/* CSS for company name cell animation */
+.company-cell {
+  position: relative; /* Ensure the position is relative for overlap */
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition on transform and color */
+}
+
+  .company-cell:hover {
+    transform: scale(1.1); /* Slightly enlarge the cell */
+    color: #ffeb3b; /* Change the color to a highlight, e.g., yellow */
+    cursor: pointer; /* Make it clear that this is interactive */
+    z-index: 1;
+    margin-bottom: -20px; /* Negative margin to pull it upwards */
+  }
+
+.symbol-cell {
+  position: relative; /* This makes the pop-up position relative to this cell */
+}
+
+.company-popup {
+  position: absolute;
+  top: 0;
+  left: 100%; /* This places the pop-up to the right of the symbol cell */
+  margin-left: 10px; /* Add some space between the symbol cell and the pop-up */
+  background-color: white;
+  border: 1px solid #8e24aa;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Change the text color and weight for the content inside the company popup */
+.company-popup-content {
+  color: black; /* Set text color to black */
+  font-weight: normal; /* Set font weight to normal */
+  text-shadow: none;
+  margin: 0; /* Remove default margin for consistency */
+}
+
+.close-company-popup {
+  cursor: pointer;
+  font-size: 25px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: black;
+}
+
+.company-news-heading {
+  font-size: 1.25rem; /* Slightly larger font size for the heading */
+  font-weight: bold; /* Bold the heading */
+  margin-bottom: 1rem; /* Space below the heading */
+  color: #333; /* Darker color for better readability */
+  border-bottom: 2px solid #8e24aa; /* Bottom border for emphasis */
+  padding-bottom: 0.5rem; /* Space between heading and articles */
+}
+
+.news-articles {
+  list-style-type: none; /* Remove default bullet points */
+  padding: 0; /* Remove default padding */
+}
+
+  .news-articles li {
+    margin-bottom: 1rem; /* Space between articles */
+    border-bottom: 1px solid #ccc; /* Optional: add a bottom border for separation */
+    padding-bottom: 0.5rem; /* Padding for better spacing */
+  }
+
+.article-title {
+  font-size: 1rem; /* Smaller font size for the title */
+  font-weight: bold; /* Bold the title */
+  margin: 0; /* Remove default margin */
+}
+
+.article-summary {
+  margin: 0; /* Remove default margin */
+  color: #555; /* Optional: change summary text color */
+}
+
+.read-more {
+  color: #8e24aa; /* Change link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make link bold */
+}
+
+  .read-more:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+
+/* Styles for the types of sentiment */
+.positive-sentiment {
+  border: 2px solid green; /* Border color for positive sentiment */
+  background-color: rgba(0, 128, 0, 0.3); /* Light transparent green background */
+}
+
+.negative-sentiment {
+  border: 2px solid red;
+  background-color: rgba(255, 0, 0, 0.1); /* Light transparent red background */
+}
+
+.neutral-sentiment {
+  border: 2px solid gray;
+  background-color: rgba(128, 128, 128, 0.05); /* Light transparent gray background */
+}

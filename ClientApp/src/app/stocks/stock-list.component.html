@@ -1,0 +1,65 @@
+<h2>Top 25 stocks from S&P500</h2>
+<table class="stock-grid">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Symbol</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stock of stocks">
+      <td class="company-cell" (click)="toggleCompanyPopup(stock.symbol);">{{ stock.companyName }}</td>
+      <td class="symbol-cell" style="position: relative">
+        {{ stock.symbol }}
+        <!-- Company pop-up (conditionally shown to the right of the symbol cell) -->
+        <div *ngIf="companyPopupSymbols[stock.symbol]" class="company-popup">
+          <div class="company-popup-content">
+            <span class="close-company-popup" (click)="closeCompanyPopup(stock.symbol); $event.stopPropagation();">&times;</span>
+            <p>Information about: {{ stock.companyName }}.</p>
+            <app-line-chart *ngIf="companyPopupSymbols[stock.symbol]"
+                            [chartData]="graphDataBySymbol[stock.symbol]?.data || []"
+                            [chartLabels]="graphDataBySymbol[stock.symbol]?.labels || []"
+                            [chartId]="companyPopupChartIds[stock.symbol]">
+            </app-line-chart>
+            <h3 class="company-news-heading">Company news</h3>
+            <ul class="news-articles">
+              <li *ngFor="let article of companyNews[stock.symbol]"
+                  [ngClass]="{
+                                      'positive-sentiment': analyzeSentiment(article.summary) === 'positive',
+                                      'negative-sentiment': analyzeSentiment(article.summary) === 'negative',
+                                      'neutral-sentiment': analyzeSentiment(article.summary) === 'neutral'
+                                    }"
+                  class="news-article-item">
+                <h4 class="article-title">{{ article.headline }}</h4> <!-- Display article headline -->
+                <p class="article-summary">{{ article.summary }}</p>     <!-- Display article summary -->
+                <a [href]="article.url">Read more</a> <!-- Link to the full article -->
+              </li>
+            </ul>
+          </div>
+        </div>
+      </td>
+      <td style="position: relative;">
+        <!-- Display current price -->
+        <span class='current-price' [ngClass]="{
+          'price-up': isPriceUp(stock),
+          'price-down': isPriceDown(stock)
+        }">{{ stock.price | currency }}</span>
+        <br />
+        <!-- Display yesterday's price with smaller text -->
+        <small class="previous-price">
+          Yesterday: {{ stock.previousPrice | currency }}
+        </small>
+        <img src="assets/info_icon.webp" alt="Info Icon" class="info-icon" (click)="togglePopup(stock.symbol)" />
+
+        <!-- Price pop-up -->
+        <div *ngIf="showPopup && currentSymbol == stock.symbol" class="popup">
+          <div class="popup-content">
+            <span class="close" (click)="closePopup()">&times;</span>
+            <div [innerHTML]="popupContent"></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
