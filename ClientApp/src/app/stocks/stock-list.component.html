@@ -64,9 +64,13 @@
 
       <td class="graph-cell" style="position: relative">
         <app-line-chart
+                        
+
+                       
     [chartData]="graphDataBySymbol[stock.symbol]?.data || []"
     [chartLabels]="graphDataBySymbol[stock.symbol]?.labels || []"
     [chartId]="companyPopupChartIds[stock.symbol]"> 
+
         </app-line-chart>
       </td>
     </tr>

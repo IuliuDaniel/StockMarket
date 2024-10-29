@@ -82,6 +82,12 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
     if (this.chartInstance) {
       this.chartInstance.data.labels = this.chartLabels;
       this.chartInstance.data.datasets[0].data = this.chartData;
+
+      // Recalculate colors based on new data
+      const isPositiveTrend = this.chartData[0] < this.chartData[this.chartData.length - 1];
+      this.chartInstance.data.datasets[0].borderColor = isPositiveTrend ? 'limegreen' : 'orangered';
+      this.chartInstance.data.datasets[0].backgroundColor = isPositiveTrend ? 'rgba(50, 205, 50, 0.2)' : 'rgba(255, 69, 0, 0.2)';
+
       this.chartInstance.update();
     } else {
       this.initChart();
