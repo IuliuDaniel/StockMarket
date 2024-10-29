@@ -4,8 +4,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ElementRef, ViewChild } from '@angular/core';
 
 // Define positive and negative keywords
-const positiveKeywords = ['gain', 'success', 'growth', 'profit', 'increase', 'upward', 'improve', 'announce', 'blockbuster', 'expanding', 'secures', 'make money'];
-const negativeKeywords = ['loss', 'decline', 'decrease', 'down', 'crisis', 'fall', 'drop', 'negative', 'dissatisfaction', 'fired', 'fire', 'downgrade', 'dissatisfaction', 'scam', 'scams', 'reverse'];
+const positiveKeywords = ['gain', 'success', 'growth', 'profit', 'increase', 'upward', 'improve', 'announce', 'blockbuster', 'expanding', 'secures', 'make money', 'soared', 'milestone'];
+const negativeKeywords = ['loss', 'decline', 'decrease', 'down', 'crisis', 'fall', 'drop', 'negative', 'dissatisfaction', 'fired', 'fire', 'downgrade', 'dissatisfaction', 'scam', 'scams', 'reverse', 'restricting', 'restrictions',
+                          ];
 
 
 @Component({
@@ -60,8 +61,9 @@ export class StockListComponent implements OnInit {
   @ViewChild('stockList', { static: false }) stockListRef!: ElementRef;
   searchSymbol: string = ''; // To hold the search input value
 
+
   // Array with less symbols for testing - less request/page load
- symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL', 'ADBE' ];
+ symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL'];
 
  /*
   symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL', 'TSLA', 'GOOG', 'BRK.B', 'META', 'UNH', 'XOM', 'LLY', 'JPM', 'JNJ',
@@ -99,6 +101,12 @@ export class StockListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchStockData();
+    // Fetch historical data for all stock symbols at the start
+    this.symbols.forEach(symbol => {
+      this.fetchStockHistory(symbol);  // Call to fetch stock data
+      this.fetchCompanyNews(symbol);    // Call to fetch company news if needed
+      this.companyPopupChartIds[symbol] = `chart-${symbol}-${Date.now()}`; // Unique ID for chart
+    });
   }
 
 
@@ -127,7 +135,7 @@ export class StockListComponent implements OnInit {
     this.companyPopupSymbols[symbol] = !this.companyPopupSymbols[symbol]; // Toggle visibility for each symbol
     if (this.companyPopupSymbols[symbol]) {
       this.companyPopupChartIds[symbol] = `chart-${symbol}-${Date.now()}`; // Unique ID based on symbol and timestamp
-      this.fetchStockHistory(symbol); // Fetch historical data when the pop-up opens
+      //this.fetchStockHistory(symbol); // Fetch historical data when the pop-up opens
       this.fetchCompanyNews(symbol); // Fetch company news for the selected symbol
     }
   }

@@ -24,7 +24,8 @@ export class StockService {
   constructor(private http: HttpClient) { }
 
   getStocks(symbol: string): Observable<any> {
-    const url = `/api/proxy?symbol=${symbol}&token=${this.apiKey}`;
+    
+    const url = `/api/proxy?symbol=${symbol}&token=${this.apiKey}`; // Production URL
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -74,7 +75,8 @@ export class StockService {
 
 
   getCompanyNews(symbol: string, from: string, to: string): Observable<any> {
-    const url = `/api/proxy?symbol=${symbol}&from=${from}&to=${to}&token=${this.apiKey}`;
+    
+    const url = `/api/proxy?symbol=${symbol}&from=${from}&to=${to}&token=${this.apiKey}`; // Production URL
     return this.http.get(url).pipe(
       catchError((error) => {
         console.error('Error fetching company news:', error);

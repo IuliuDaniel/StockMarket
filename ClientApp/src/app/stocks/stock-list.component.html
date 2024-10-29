@@ -3,25 +3,26 @@
   <thead>
     <tr>
       <th>Company</th>
-      <th>Symbol</th>
       <th>Price</th>
+      <th>Seven days graph</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let stock of stocks">
-      <td class="company-cell" (click)="toggleCompanyPopup(stock.symbol);">{{ stock.companyName }}</td>
-      <td class="symbol-cell" style="position: relative">
-        {{ stock.symbol }}
+
+
+      <td class="company-cell" (click)="toggleCompanyPopup(stock.symbol);">
+        {{stock.symbol}}
+      <p>{{ stock.companyName }} </p>
+      </td>
+
+
+      <td style="position: relative;">
         <!-- Company pop-up (conditionally shown to the right of the symbol cell) -->
         <div *ngIf="companyPopupSymbols[stock.symbol]" class="company-popup">
           <div class="company-popup-content">
             <span class="close-company-popup" (click)="closeCompanyPopup(stock.symbol); $event.stopPropagation();">&times;</span>
             <p>Information about: {{ stock.companyName }}.</p>
-            <app-line-chart *ngIf="companyPopupSymbols[stock.symbol]"
-                            [chartData]="graphDataBySymbol[stock.symbol]?.data || []"
-                            [chartLabels]="graphDataBySymbol[stock.symbol]?.labels || []"
-                            [chartId]="companyPopupChartIds[stock.symbol]">
-            </app-line-chart>
             <h3 class="company-news-heading">Company news</h3>
             <ul class="news-articles">
               <li *ngFor="let article of companyNews[stock.symbol]"
@@ -38,8 +39,6 @@
             </ul>
           </div>
         </div>
-      </td>
-      <td style="position: relative;">
         <!-- Display current price -->
         <span class='current-price' [ngClass]="{
           'price-up': isPriceUp(stock),
@@ -59,6 +58,16 @@
             <div [innerHTML]="popupContent"></div>
           </div>
         </div>
+      </td>
+
+
+
+      <td class="graph-cell" style="position: relative">
+        <app-line-chart
+    [chartData]="graphDataBySymbol[stock.symbol]?.data || []"
+    [chartLabels]="graphDataBySymbol[stock.symbol]?.labels || []"
+    [chartId]="companyPopupChartIds[stock.symbol]"> 
+        </app-line-chart>
       </td>
     </tr>
   </tbody>

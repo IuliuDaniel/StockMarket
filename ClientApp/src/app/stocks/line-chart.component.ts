@@ -13,8 +13,8 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
   @Input() chartId: string = '';
 
   private chartInstance: Chart | null = null;
-  canvasWidth: number = 600;
-  canvasHeight: number = 200;
+  canvasWidth: number = 400;
+  canvasHeight: number = 10;
 
   ngAfterViewInit(): void {
     this.initChart();
@@ -29,6 +29,10 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
   initChart(): void {
     const ctx = (document.getElementById(this.chartId) as HTMLCanvasElement)?.getContext('2d');
     if (ctx) {
+      const isPositiveTrend = this.chartData[0] < this.chartData[this.chartData.length - 1];
+      const lineColor = isPositiveTrend ? 'limegreen' : 'orangered';
+      const fillColor = isPositiveTrend ? 'rgba(50, 205, 50, 0.2)' : 'rgba(255, 69, 0, 0.2)'; // Brighter green/red background
+
       this.chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
@@ -36,17 +40,37 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
           datasets: [{
             label: 'One week chart',
             data: this.chartData,
-            fill: false,
-            borderColor: 'blue',
-            tension: 0.1,
+            fill: true, // Enable background below the line
+            backgroundColor: fillColor, // Bright green or red background fill
+            borderColor: lineColor, // Bright line color
+            borderWidth: 5, // Thicker line
+            tension: 0.3,
+            pointRadius: 2, // Bigger points
+            pointBackgroundColor: lineColor, // Points matching line color
           }],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              enabled: true,
+            },
+          },
           scales: {
+            x: {
+              display: false,
+            },
             y: {
-              beginAtZero: false,
+              display: false,
+            },
+          },
+          elements: {
+            point: {
+              radius: 3, // Control point size here
             },
           },
         },
