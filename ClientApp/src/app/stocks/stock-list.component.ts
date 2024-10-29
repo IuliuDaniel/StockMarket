@@ -63,12 +63,12 @@ export class StockListComponent implements OnInit {
 
 
   // Array with less symbols for testing - less request/page load
- symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL'];
+ //symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL'];
 
- /*
+ 
   symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL', 'TSLA', 'GOOG', 'BRK.B', 'META', 'UNH', 'XOM', 'LLY', 'JPM', 'JNJ',
                        'V', 'PG', 'MA', 'AVGO', 'HD', 'CVX', 'MRK', 'ABBV', 'COST', 'PEP', 'ADBE'];
- */
+ 
   companyNames: string[] = [
     'Apple Inc.',
     'Microsoft Corp.',
