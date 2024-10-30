@@ -22,7 +22,7 @@
         <div *ngIf="companyPopupSymbols[stock.symbol]" class="company-popup">
           <div class="company-popup-content">
             <span class="close-company-popup" (click)="closeCompanyPopup(stock.symbol); $event.stopPropagation();">&times;</span>
-            <p>Information about: {{ stock.companyName }}.</p>
+            <p>Information about: {{ stock.companyName }}</p>
             <h3 class="company-news-heading">Company news</h3>
             <ul class="news-articles">
               <li *ngFor="let article of companyNews[stock.symbol]"
@@ -64,15 +64,27 @@
 
       <td class="graph-cell" style="position: relative">
         <app-line-chart
-                        
-
-                       
     [chartData]="graphDataBySymbol[stock.symbol]?.data || []"
     [chartLabels]="graphDataBySymbol[stock.symbol]?.labels || []"
-    [chartId]="companyPopupChartIds[stock.symbol]"> 
-
+    [chartId]="companyPopupChartIds[stock.symbol]">
         </app-line-chart>
       </td>
     </tr>
   </tbody>
 </table>
+
+<footer class="technologies-used">
+  <h4>Technologies Used:</h4>
+  <ul>
+    <li>Angular</li>
+    <li>TypeScript</li>
+    <li>Graph.js</li>
+    <li>CSS</li>
+    <li>HTML</li>
+    <li>Vercel</li>
+    <!-- Add more technologies as needed -->
+  </ul>
+  <h4>API calls:</h4>
+  <p>Finnhub.io for current stock prices (today, yesterday) and company news.</p>
+  <p>Alphavantage.co for historical prices to develop the graphs.</p>
+</footer>

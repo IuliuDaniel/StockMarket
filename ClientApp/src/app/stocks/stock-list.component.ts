@@ -61,9 +61,11 @@ export class StockListComponent implements OnInit {
   @ViewChild('stockList', { static: false }) stockListRef!: ElementRef;
   searchSymbol: string = ''; // To hold the search input value
 
+  // Add a new property for each symbol to track the arrow direction
+  arrowDirections: { [key: string]: 'up' | 'down' | 'neutral' } = {};
 
   // Array with less symbols for testing - less request/page load
- //symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL'];
+// symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL'];
 
  
   symbols: string[] = ['AAPL', 'MSFT', 'AMZN', 'NVDA', 'GOOGL', 'TSLA', 'GOOG', 'BRK.B', 'META', 'UNH', 'XOM', 'LLY', 'JPM', 'JNJ',
@@ -206,8 +208,8 @@ export class StockListComponent implements OnInit {
       }
     );
   }
+
   // Request for stock history, limited to 25 requests/day - find better alternative
-  
   fetchStockHistory(symbol: string): void {
     this.stockService.getStockHistory(symbol).subscribe(
       (data) => {
